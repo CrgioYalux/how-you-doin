@@ -1,0 +1,96 @@
+.login {
+  position: relative;
+  width: 60vw;
+  height: 40vh;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-around;
+
+  border-radius: 60px 60px 10px 60px;
+
+  background-color: black;
+  z-index: 0;
+}
+
+.login::after,
+.login::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -5;
+}
+
+.login::before {
+  width: calc(100% + 30px);
+  height: calc(100% + 30px);
+  border-right: 10px solid rgb(255, 255, 255);
+  border-bottom: 10px solid rgb(255, 255, 255);
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  border-radius: 0px 80px 0px 80px;
+}
+
+.login::after {
+  width: calc(100% + 50px);
+  height: calc(100% + 50px);
+  border-left: 10px solid rgb(255, 255, 255);
+  border-top: 10px solid rgb(255, 255, 255);
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-radius: 0px 80px 0px 80px;
+}
+
+.inputs {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  height: 50%;
+  width: 100%;
+}
+
+.inputs > div {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 5px;
+}
+
+.label {
+  position: relative;
+  left: 10px;
+  width: 80%;
+  font-weight: 700;
+  color: white;
+}
+
+.input {
+  border: 0;
+  width: 80%;
+  padding: 0.2rem;
+  outline-offset: 1px;
+}
+
+.login > button {
+  padding: 0.4rem 1.4rem;
+  border: 0;
+  border-radius: 9999px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.button_not_disabled {
+  cursor: pointer;
+  transition: background-color 0.4s ease;
+}
+.button_not_disabled:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.button_disabled {
+  opacity: 0.6;
+}
