@@ -1,5 +1,6 @@
 import styles from 'styles/Login.module.css'
 import {useState, useEffect} from 'react'
+import { createChatroom } from 'firebase/client'
 
 const Login = ({setLogin}) => {
     const [nickname, setNickname] = useState(0)
@@ -24,6 +25,7 @@ const Login = ({setLogin}) => {
     const handleSubmitLogin = (e) => {
         e.preventDefault()
         if (localStorage) localStorage.setItem("nickname", nickname)
+        createChatroom(chatroomID)
         setLogin({nickname, chatroomID})
     }
 

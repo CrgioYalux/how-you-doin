@@ -1,5 +1,17 @@
 .container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.chat {
   width: 90vw;
-  height: 90vh;
+  height: 80vh;
   background-color: #cccfff;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: black #9b9fd5;
+  outline: 0;
+  border: 0;
 }

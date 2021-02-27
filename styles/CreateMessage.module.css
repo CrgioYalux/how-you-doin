@@ -1,0 +1,43 @@
+.container {
+  width: 100%;
+  min-height: 5vh;
+  max-height: 15vh;
+}
+
+.message {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.message > * {
+  outline: 0;
+  border: 0;
+}
+
+.message_input {
+  flex: 1;
+  padding: 0.2rem 0.8rem 0.2rem 0.4rem;
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  border-radius: 5px;
+  resize: none;
+  background-color: #cccfff;
+}
+
+.create_message_button {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  background-color: rgb(235, 200, 135);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.create_message_button > * {
+  position: relative;
+  right: 2px;
+}

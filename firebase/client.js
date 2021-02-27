@@ -15,35 +15,31 @@ const firebaseConfig = {
 
 const db = firebase.firestore()
 
-export const fetchLatestMessages = () => {
-  return db.collection('Chatrooms')
-    .get()
-    .then(({docs}) => {
-      return docs.map(doc => {
-        const data = doc.data()
-        const { id } = doc
-        return {
-          ...data,
-          id
-        }
-      })
-    })
+export const fetchLatestMessages = async (id) => {
+  const req = db.collection('Chatrooms').doc(id);
+  const doc = await req.get();
+  return doc.data()
 }
 
 export const createChatroom = (id) => {
-  if (id) return db.collection('Chatrooms').doc(id).set({
-    messages: [],
-    participants: []
-  })
+  if (db.collection('Chatrooms').doc(id)) console.log("Existe!")
+  // if (id) return db.collection('Chatrooms').doc(id).set({
+  //   chat: [],
+  // })
   // else return db.collection('Chatrooms')
 }
 
-export const sendMessage = (message) => {
-  const { author, content, date, id } = message
-  return db.collection('Chatrooms').add({
-    author,
-    content,
-    date,
-    id
-  })
+const getLast = async (message, id) => {
+  const data = await fetchLatestMessages(id)
+  console.log(data)
+  // data[0].chat.push(message)
+
+  // return data[0].chat
+}
+
+export const sendMessage = async (message, id) => {
+  const data = await fetchLatestMessages(id)
+  const { chat } = data
+  chat.push(message)
+  db.collection('Chatrooms').doc(id).update({chat})
 }
