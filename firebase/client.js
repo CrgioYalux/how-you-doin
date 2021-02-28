@@ -41,5 +41,5 @@ export const sendMessage = async (message, id) => {
   const data = await fetchLatestMessages(id)
   const { chat } = data
   chat.push(message)
-  db.collection('Chatrooms').doc(id).update({chat})
+  return db.collection('Chatrooms').doc(id).update({chat})
 }

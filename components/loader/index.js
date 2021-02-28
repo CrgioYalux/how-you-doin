@@ -7,8 +7,10 @@ const Loader = () => {
                 {`
                     .spinner {
                         position: absolute;
-                        top: 45%;
-                        left: 45%;
+                        top: 50%;
+                        left: 50%;
+
+                        transform: translate(-50%, -50%);
                         
 
                         border: 4px solid rgba(0, 0, 0, .1);

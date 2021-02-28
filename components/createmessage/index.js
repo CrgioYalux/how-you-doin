@@ -8,19 +8,23 @@ const CreateMessage = ({nickname, messageId}) => {
     const router = useRouter()
     const { id } = router.query
 
-    const createMessage = (e) => {
-        e.preventDefault()    
+    const createMessage = async (e) => {
+        e.preventDefault()            
+
         const date = getDate()
-        const content = e.target[0].value
-        sendMessage({
-            
+        const content = await e.target[0].value
+
+        e.target[0].focus()
+        e.target[0].value = ""
+
+        await sendMessage({
             author: nickname,
             content,
             date,
             id: `${messageId}`
         }, id)
-        e.target[0].value = ""
-        e.target[0].focus()
+
+        router.reload()
     }
 
     return (
