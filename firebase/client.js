@@ -29,14 +29,6 @@ export const createChatroom = (id) => {
   // else return db.collection('Chatrooms')
 }
 
-const getLast = async (message, id) => {
-  const data = await fetchLatestMessages(id)
-  console.log(data)
-  // data[0].chat.push(message)
-
-  // return data[0].chat
-}
-
 export const sendMessage = async (message, id) => {
   const data = await fetchLatestMessages(id)
   const { chat } = data

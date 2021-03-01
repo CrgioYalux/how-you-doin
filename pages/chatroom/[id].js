@@ -1,28 +1,25 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { fetchLatestMessages } from 'firebase/client'
-
 import styles from 'styles/Chatroom.module.css'
-
 import Chat from 'components/chat'
 import Loader from 'components/loader'
 import CreateMessage from 'components/createmessage'
+import useSocket from 'hooks/useSocket'
+import fetch from 'isomorphic-unfetch'
 
-const Chatroom = ({chat}) => {
+const Chatroom = (props) => {
+    const [messages, setMessages] = useState(props.chat || [])
     const router = useRouter()
     const { id } = router.query
-    const [messages, setMessages] = useState(chat)
     const [nickname, setNickname] = useState(undefined)
+    const socket = useSocket('chat:message', message => {
+        setMessages(messages => [...messages, message])
 
-    // setInterval(() => {
-    //     const getMessages = async (id) => {
-    //         const data = await fetchLatestMessages(id)
-    //         const { chat } = data
-    //         return chat
-    //     }
-    //     getMessages(id).then(setMessages)
-    //     // Risky risky
-    // }, 1000);
+    })
+    const handleSubmit = (message, id) => {
+        socket.emit('chat:message', {message, id})
+        // setMessages(messages => [...messages, message])
+    }
 
     useEffect(() => {
         const nickname = localStorage.getItem('nickname')
@@ -34,9 +31,9 @@ const Chatroom = ({chat}) => {
             {nickname 
             ?   <>
                     <div className={styles.chat}>
-                        <Chat messages={messages} nickname={nickname}/>
+                        <Chat messages={messages} nickname={nickname} />
                     </div>
-                    <CreateMessage nickname={nickname} messageId={messages ? messages.length : 0} />
+                    <CreateMessage nickname={nickname} handleSubmit={handleSubmit} />
                 </>
             : <Loader />
             }
@@ -45,9 +42,9 @@ const Chatroom = ({chat}) => {
 }
 
 export const getServerSideProps = async (context) => {
-    const data = await fetchLatestMessages(context.query.id)
-    const { chat } = data
-    return {props: {chat}}
+    const data = await fetch(`http://localhost:3000/messages/${context.query.id}`)
+    const chat = await data.json()
+    return { props: {chat} }
 }
 
 export default Chatroom

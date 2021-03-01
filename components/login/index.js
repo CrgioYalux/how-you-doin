@@ -39,7 +39,7 @@ const Login = ({setLogin}) => {
             <div className={styles.inputs}>
                 <div>
                     <label className={styles.label}>nickname: </label>
-                    <input placeholder={lastNickname ? `last used: ${lastNickname}` : null} className={styles.input} type="text" onChange={handleNicknameChange}/>
+                    <input placeholder={lastNickname ? `last used: ${lastNickname}` : null} className={styles.input} type="text" onChange={handleNicknameChange} autoFocus/>
                 </div>
                 <div>
                     <label className={styles.label}>chatroom's id: </label>
