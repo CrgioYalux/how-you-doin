@@ -1,7 +1,6 @@
 import styles from 'styles/CreateMessage.module.css'
 import Image from 'next/image'
 import { getDate } from 'helpers/getDate'
-import { sendMessage } from 'firebase/client'
 import { useRouter } from 'next/router'
 
 const CreateMessage = ({nickname, handleSubmit}) => {
@@ -19,7 +18,6 @@ const CreateMessage = ({nickname, handleSubmit}) => {
             date,
             id: new Date().getTime()
         }
-        // sendMessage(message, id)
         handleSubmit(message, id)
     
         e.target[0].focus()

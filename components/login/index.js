@@ -1,6 +1,6 @@
 import styles from 'styles/Login.module.css'
 import {useState, useEffect} from 'react'
-import { createChatroom } from 'firebase/client'
+import useSocket from 'hooks/useSocket'
 
 const Login = ({setLogin}) => {
     const [nickname, setNickname] = useState(0)
@@ -14,6 +14,10 @@ const Login = ({setLogin}) => {
         }
     }, [])
 
+    const socket = useSocket('set:chatroom_id', id => {
+        setChatroomID(id)
+    })
+
     const handleChatroomIDChange = (e) => {
         setChatroomID(e.target.value)
     }
@@ -25,10 +29,15 @@ const Login = ({setLogin}) => {
     const handleSubmitLogin = (e) => {
         e.preventDefault()
         if (localStorage) localStorage.setItem("nickname", nickname)
-        createChatroom(chatroomID)
+        socket.emit('set:chatroom_id', chatroomID)
         setLogin({nickname, chatroomID})
+        // createChatroom(chatroomID).then((exists) => {
+        //     if(!exists){
+        //     }
+        // })
+        // socket.emit('chat:message', id)
     }
-
+    
     const checkInputs = () => {
         return !chatroomID.length || !nickname.length
     }

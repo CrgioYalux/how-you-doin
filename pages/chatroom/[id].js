@@ -12,18 +12,19 @@ const Chatroom = (props) => {
     const router = useRouter()
     const { id } = router.query
     const [nickname, setNickname] = useState(undefined)
-    const socket = useSocket('chat:message', message => {
+    const socket = useSocket(`send:message`, message => {
         setMessages(messages => [...messages, message])
 
     })
     const handleSubmit = (message, id) => {
-        socket.emit('chat:message', {message, id})
+        socket.emit(`send:message`, {message, id})
         // setMessages(messages => [...messages, message])
     }
 
     useEffect(() => {
         const nickname = localStorage.getItem('nickname')
-        setNickname(nickname)
+        if (!nickname) router.push('/')
+        else setNickname(nickname)
     }, [])
 
     return(
