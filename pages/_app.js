@@ -5,7 +5,6 @@ import {useState,useEffect} from 'react'
 function MyApp({ Component, pageProps }) {
   const [socket, setSocket] = useState(null)
   useEffect(() => {
-    console.log("socket is ", socket)
     const socket = io()
     setSocket(socket)
   }, [])
